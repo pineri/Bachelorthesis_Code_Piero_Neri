@@ -11,7 +11,6 @@ import warnings
 warnings.filterwarnings('ignore')
 import statsmodels.api as sm
 
-plt.rcParams['figure.figsize'] = [12, 4]
 
 
 # uses the package pmdarima
