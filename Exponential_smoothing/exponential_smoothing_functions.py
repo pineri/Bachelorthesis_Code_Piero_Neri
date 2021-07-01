@@ -43,7 +43,7 @@ def N_N(yy, alpha, l, h=1):
     
     return (fit, forecasts)
 
-def auto_N_N(data, h=1, grid_size=6, rand_iter=500):
+def auto_N_N(data, h=1, initial_grid=6, fine_grid=11, rand_iter=500):
     
     y = data.copy(deep=True)                        
     y.columns = ['t', 'y']
@@ -72,7 +72,7 @@ def auto_N_N(data, h=1, grid_size=6, rand_iter=500):
     best_forecasts = None
 
     # grid search for optimal parameters
-    for alpha in np.linspace(0.00001, 0.99999, grid_size):
+    for alpha in np.linspace(0.00001, 0.99999, initial_grid):
         alpha = float(alpha)
                 
         # perform exponential smoothing
@@ -89,8 +89,8 @@ def auto_N_N(data, h=1, grid_size=6, rand_iter=500):
             best_forecasts = forecasts
     
     
-    n = 11
-    surr = 1/(2*(grid_size-1))
+    n = fine_grid
+    surr = 1/(2*(initial_grid-1))
     
     alpha_space = np.array([el for el in list(np.linspace(best_alpha-surr, best_alpha+surr, n)) if 0<el and 1>el])
     
@@ -149,7 +149,7 @@ def N_A(yy, m, alpha, gamma, l, s, h=1):
     
     return (fit, forecasts)
 
-def auto_N_A(data, m, h=1, grid_size=6, rand_iter=500):
+def auto_N_A(data, m, h=1, initial_grid=6, fine_grid=11, rand_iter=500):
     
     y = data.copy(deep=True)                        
     y.columns = ['t', 'y']
@@ -193,9 +193,9 @@ def auto_N_A(data, m, h=1, grid_size=6, rand_iter=500):
     best_forecasts = None
 
     # grid search for optimal parameters
-    for alpha in np.linspace(0.00001, 0.99999, grid_size):
+    for alpha in np.linspace(0.00001, 0.99999, initial_grid):
         alpha = float(alpha)
-        for gamma in np.linspace(0.00001, alpha-0.00001, grid_size):
+        for gamma in np.linspace(0.00001, alpha-0.00001, initial_grid):
             gamma = float(gamma)
                 
             # perform exponential smoothing
@@ -213,8 +213,8 @@ def auto_N_A(data, m, h=1, grid_size=6, rand_iter=500):
                 best_forecasts = forecasts
     
     
-    n = 11
-    surr = 1/(2*(grid_size-1))
+    n = fine_grid
+    surr = 1/(2*(initial_grid-1))
     
     alpha_space = np.array([el for el in list(np.linspace(best_alpha-surr, best_alpha+surr, n)) if 0<el and 1>el])
     gamma_space = np.array([el for el in list(np.linspace(best_gamma-surr, best_gamma+surr, n)) if 0<el and 1>el])
@@ -277,7 +277,7 @@ def N_M(yy, m, alpha, gamma, l, s, h=1):
     
     return (fit, forecasts)
 
-def auto_N_M(data, m, h=1, grid_size=6, rand_iter=500):
+def auto_N_M(data, m, h=1, initial_grid=6, fine_grid=11, rand_iter=500):
     
     y = data.copy(deep=True)                        
     y.columns = ['t', 'y']
@@ -321,9 +321,9 @@ def auto_N_M(data, m, h=1, grid_size=6, rand_iter=500):
     best_forecasts = None
 
     # grid search for optimal parameters
-    for alpha in np.linspace(0.00001, 0.99999, grid_size):
+    for alpha in np.linspace(0.00001, 0.99999, initial_grid):
         alpha = float(alpha)
-        for gamma in np.linspace(0.00001, alpha-0.00001, grid_size):
+        for gamma in np.linspace(0.00001, alpha-0.00001, initial_grid):
             gamma = float(gamma)
                 
             # perform exponential smoothing
@@ -340,8 +340,8 @@ def auto_N_M(data, m, h=1, grid_size=6, rand_iter=500):
                 best_fit = fit
                 best_forecasts = forecasts
     
-    n = 11
-    surr = 1/(2*(grid_size-1))
+    n = fine_grid
+    surr = 1/(2*(initial_grid-1))
     
     alpha_space = np.array([el for el in list(np.linspace(best_alpha-surr, best_alpha+surr, n)) if 0<el and 1>el])
     gamma_space = np.array([el for el in list(np.linspace(best_gamma-surr, best_gamma+surr, n)) if 0<el and 1>el])
@@ -403,7 +403,7 @@ def A_N(yy, alpha, beta, l, b, h=1):
     
     return (fit, forecasts)
 
-def auto_A_N(data, h=1, grid_size=6, rand_iter=500):
+def auto_A_N(data, h=1, initial_grid=6, fine_grid=11, rand_iter=500):
     
     y = data.copy(deep=True)                        
     y.columns = ['t', 'y']
@@ -436,9 +436,9 @@ def auto_A_N(data, h=1, grid_size=6, rand_iter=500):
     best_forecasts = None
 
     # grid search for optimal parameters
-    for alpha in np.linspace(0.00001, 0.99999, grid_size):
+    for alpha in np.linspace(0.00001, 0.99999, initial_grid):
         alpha = float(alpha)
-        for beta in np.linspace(0.00001, 0.99999, grid_size):
+        for beta in np.linspace(0.00001, 0.99999, initial_grid):
             beta = float(beta)
                 
             # perform exponential smoothing
@@ -455,8 +455,8 @@ def auto_A_N(data, h=1, grid_size=6, rand_iter=500):
                 best_fit = fit
                 best_forecasts = forecasts
     
-    n = 11
-    surr = 1/(2*(grid_size-1))
+    n = fine_grid
+    surr = 1/(2*(initial_grid-1))
     
     alpha_space = np.array([el for el in list(np.linspace(best_alpha-surr, best_alpha+surr, n)) if 0<el and 1>el])
     beta_space = np.array([el for el in list(np.linspace(best_beta-surr, best_beta+surr, n)) if 0<el and 1>el])
@@ -522,7 +522,7 @@ def A_A(yy, m, alpha, beta, gamma, l, b, s, h=1):
     
     return (fit, forecasts)
 
-def auto_A_A(data, m, h=1, grid_size=6, rand_iter=500):
+def auto_A_A(data, m, h=1, initial_grid=6, fine_grid=11, rand_iter=500):
     
     y = data.copy(deep=True)                        
     y.columns = ['t', 'y']
@@ -573,11 +573,11 @@ def auto_A_A(data, m, h=1, grid_size=6, rand_iter=500):
     best_forecasts = None
 
     # grid search for optimal parameters
-    for alpha in np.linspace(0.00001, 0.99999, grid_size):
+    for alpha in np.linspace(0.00001, 0.99999, initial_grid):
         alpha = float(alpha)
-        for beta in np.linspace(0.00001, 0.99999, grid_size):
+        for beta in np.linspace(0.00001, 0.99999, initial_grid):
             beta = float(beta)
-            for gamma in np.linspace(0.00001, alpha-0.00001, grid_size):
+            for gamma in np.linspace(0.00001, alpha-0.00001, initial_grid):
                 gamma = float(gamma)
                 
                 # perform exponential smoothing
@@ -595,8 +595,8 @@ def auto_A_A(data, m, h=1, grid_size=6, rand_iter=500):
                     best_fit = fit
                     best_forecasts = forecasts
     
-    n = 11
-    surr = 1/(2*(grid_size-1))
+    n = fine_grid
+    surr = 1/(2*(initial_grid-1))
     
     alpha_space = np.array([el for el in list(np.linspace(best_alpha-surr, best_alpha+surr, n)) if 0<el and 1>el])
     beta_space = np.array([el for el in list(np.linspace(best_beta-surr, best_beta+surr, n)) if 0<el and 1>el])
@@ -666,7 +666,7 @@ def A_M(yy, m, alpha, beta, gamma, l, b, s, h=1):
     
     return (fit, forecasts)
 
-def auto_A_M(data, m, h=1, grid_size=6, rand_iter=500):
+def auto_A_M(data, m, h=1, initial_grid=6, fine_grid=11, rand_iter=500):
     
     y = data.copy(deep=True)                        
     y.columns = ['t', 'y']
@@ -714,11 +714,11 @@ def auto_A_M(data, m, h=1, grid_size=6, rand_iter=500):
     best_forecasts = None
 
     # grid search for optimal parameters
-    for alpha in np.linspace(0.00001, 0.99999, grid_size):
+    for alpha in np.linspace(0.00001, 0.99999, initial_grid):
         alpha = float(alpha)
-        for beta in np.linspace(0.00001, 0.99999, grid_size):
+        for beta in np.linspace(0.00001, 0.99999, initial_grid):
             beta = float(beta)
-            for gamma in np.linspace(0.00001, alpha-0.00001, grid_size):
+            for gamma in np.linspace(0.00001, alpha-0.00001, initial_grid):
                 gamma = float(gamma)
                 
                 # perform exponential smoothing
@@ -737,8 +737,8 @@ def auto_A_M(data, m, h=1, grid_size=6, rand_iter=500):
                     best_forecasts = forecasts
     
     
-    n = 11
-    surr = 1/(2*(grid_size-1))
+    n = fine_grid
+    surr = 1/(2*(initial_grid-1))
     
     alpha_space = np.array([el for el in list(np.linspace(best_alpha-surr, best_alpha+surr, n)) if 0<el and 1>el])
     beta_space = np.array([el for el in list(np.linspace(best_beta-surr, best_beta+surr, n)) if 0<el and 1>el])
@@ -807,7 +807,7 @@ def Ad_N(yy, alpha, beta, phi, l, b, h=1):
     return (fit, forecasts)
 
 
-def auto_Ad_N(data, h=1, grid_size=6, rand_iter=500):
+def auto_Ad_N(data, h=1, initial_grid=6, fine_grid=11, rand_iter=500):
     
     y = data.copy(deep=True)                        
     y.columns = ['t', 'y']
@@ -841,11 +841,11 @@ def auto_Ad_N(data, h=1, grid_size=6, rand_iter=500):
     best_forecasts = None
 
     # grid search for optimal parameters
-    for alpha in np.linspace(0.00001, 0.99999, grid_size):
+    for alpha in np.linspace(0.00001, 0.99999, initial_grid):
         alpha = float(alpha)
-        for beta in np.linspace(0.00001, 0.99999, grid_size):
+        for beta in np.linspace(0.00001, 0.99999, initial_grid):
             beta = float(beta)
-            for phi in np.linspace(0.8, 0.98, grid_size):
+            for phi in np.linspace(0.8, 0.98, initial_grid):
                 phi = float(phi)
                 
                 # perform exponential smoothing
@@ -864,10 +864,10 @@ def auto_Ad_N(data, h=1, grid_size=6, rand_iter=500):
                     best_forecasts = forecasts
     
     
-    n = 11
-    surr = 1/(2*(grid_size-1))
+    n = fine_grid
+    surr = 1/(2*(initial_grid-1))
     
-    surr_phi = 0.18/(2*(grid_size-1))
+    surr_phi = 0.18/(2*(initial_grid-1))
     
     
     alpha_space = np.array([el for el in list(np.linspace(best_alpha-surr, best_alpha+surr, n)) if 0<el and 1>el])
@@ -943,7 +943,7 @@ def Ad_A(yy, m, alpha, beta, gamma, phi, l, b, s, h=1):
     return (fit, forecasts)
 
 
-def auto_Ad_A(data, m, h=1, grid_size=6, rand_iter=500):
+def auto_Ad_A(data, m, h=1, initial_grid=6, fine_grid=11, rand_iter=500):
     
     y = data.copy(deep=True)                        
     y.columns = ['t', 'y']
@@ -992,13 +992,13 @@ def auto_Ad_A(data, m, h=1, grid_size=6, rand_iter=500):
     best_forecasts = None
 
     # grid search for optimal parameters
-    for alpha in np.linspace(0.00001, 0.99999, grid_size):
+    for alpha in np.linspace(0.00001, 0.99999, initial_grid):
         alpha = float(alpha)
-        for beta in np.linspace(0.00001, 0.99999, grid_size):
+        for beta in np.linspace(0.00001, 0.99999, initial_grid):
             beta = float(beta)
-            for gamma in np.linspace(0.00001, alpha-0.00001, grid_size):
+            for gamma in np.linspace(0.00001, alpha-0.00001, initial_grid):
                 gamma = float(gamma)
-                for phi in np.linspace(0.8, 0.98, grid_size):
+                for phi in np.linspace(0.8, 0.98, initial_grid):
                     phi = float(phi)
                 
                     # perform exponential smoothing
@@ -1016,10 +1016,10 @@ def auto_Ad_A(data, m, h=1, grid_size=6, rand_iter=500):
                         best_phi = phi
                         best_fit = fit
                         best_forecasts = forecasts
-    n = 11
-    surr = 1/(2*(grid_size-1))
+    n = fine_grid
+    surr = 1/(2*(initial_grid-1))
     
-    surr_phi = 0.18/(2*(grid_size-1))
+    surr_phi = 0.18/(2*(initial_grid-1))
     
     
     alpha_space = np.array([el for el in list(np.linspace(best_alpha-surr, best_alpha+surr, n)) if 0<el and 1>el])
@@ -1096,7 +1096,7 @@ def Ad_M(yy, m, alpha, beta, gamma, phi, l, b, s, h=1):
     return (fit, forecasts)
 
 
-def auto_Ad_M(data, m, h=1, grid_size=6, rand_iter=500):
+def auto_Ad_M(data, m, h=1, initial_grid=6, fine_grid=11, rand_iter=500):
     
     y = data.copy(deep=True)                        
     y.columns = ['t', 'y']
@@ -1145,13 +1145,13 @@ def auto_Ad_M(data, m, h=1, grid_size=6, rand_iter=500):
     best_forecasts = None
 
     # grid search for optimal parameters
-    for alpha in np.linspace(0.00001, 0.99999, grid_size):
+    for alpha in np.linspace(0.00001, 0.99999, initial_grid):
         alpha = float(alpha)
-        for beta in np.linspace(0.00001, 0.99999, grid_size):
+        for beta in np.linspace(0.00001, 0.99999, initial_grid):
             beta = float(beta)
-            for gamma in np.linspace(0.00001, alpha-0.00001, grid_size):
+            for gamma in np.linspace(0.00001, alpha-0.00001, initial_grid):
                 gamma = float(gamma)
-                for phi in np.linspace(0.8, 0.98, grid_size):
+                for phi in np.linspace(0.8, 0.98, initial_grid):
                     phi = float(phi)
                 
                     # perform exponential smoothing
@@ -1171,10 +1171,10 @@ def auto_Ad_M(data, m, h=1, grid_size=6, rand_iter=500):
                         best_forecasts = forecasts
     
     
-    n = 11
-    surr = 1/(2*(grid_size-1))
+    n = fine_grid
+    surr = 1/(2*(initial_grid-1))
     
-    surr_phi = 0.18/(2*(grid_size-1))
+    surr_phi = 0.18/(2*(initial_grid-1))
     
     
     alpha_space = np.array([el for el in list(np.linspace(best_alpha-surr, best_alpha+surr, n)) if 0<el and 1>el])
@@ -1223,7 +1223,7 @@ def auto_Ad_M(data, m, h=1, grid_size=6, rand_iter=500):
 
 # # Evaluation
 
-def rolling_forecasting_origin_evaluation(training_data, test_data, method , m=0, h=1, grid_size=6, rand_iter=500):
+def rolling_forecasting_origin_evaluation(training_data, test_data, method , m=0, h=1, initial_grid=6, fine_grid=11, rand_iter=500):
     
     training_data.columns = ['t', 'y']
     test_data.columns = ['t', 'y']
@@ -1236,9 +1236,9 @@ def rolling_forecasting_origin_evaluation(training_data, test_data, method , m=0
     for i in range(h-1, test_data.shape[0]):
         
         if(m == 0):
-            result = method(training_data, h, grid_size, rand_iter)
+            result = method(training_data, h, initial_grid, fine_grid, rand_iter)
         else:
-            result = method(training_data, m, h, grid_size, rand_iter)
+            result = method(training_data, m, h, initial_grid, fine_grid, rand_iter)
          
         errors.append(list(np.array(test_data['y'])[i-h+1:i+1] - np.array(result[1]['y'])))
     

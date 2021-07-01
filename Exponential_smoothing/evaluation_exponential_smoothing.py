@@ -64,8 +64,9 @@ print(now)
 variable = 'temperature' # or 'humidity'
 m = 24
 h = 24
-grid_size = 6
-rand_iter=500
+initial_grid = 6
+fine_grid = 11
+rand_iter = 500
 
 MAE = []
 MSE = []
@@ -109,12 +110,12 @@ while(split+one_week <= df2.loc[df2.shape[0]-1, 'timestamp']):
     for method in methods:
         
         if(method[2]):
-            res = method[1](training_data, m, h, grid_size, rand_iter)
+            res = method[1](training_data, m, h, initial_grid, fine_grid, rand_iter)
             aic = res[2]
             #print(aic)
             
         else:
-            res = method[1](training_data, h, grid_size, rand_iter)
+            res = method[1](training_data, h, initial_grid, fine_grid, rand_iter)
             aic = res[2]
             #print(aic)
     
@@ -129,10 +130,10 @@ while(split+one_week <= df2.loc[df2.shape[0]-1, 'timestamp']):
     
     # evaluate the selected method on the test data
     if(best_method[2]):
-        res = rolling_forecasting_origin_evaluation(training_data, test_data, best_method[1], m, h, grid_size, rand_iter)
+        res = rolling_forecasting_origin_evaluation(training_data, test_data, best_method[1], m, h, initial_grid, fine_grid, rand_iter)
         
     else:
-        res = rolling_forecasting_origin_evaluation(training_data, test_data, best_method[1], 0, h, grid_size, rand_iter)
+        res = rolling_forecasting_origin_evaluation(training_data, test_data, best_method[1], 0, h, initial_grid, fine_grid, rand_iter)
     
     MAE.append( res[0] )
     MSE.append( res[1] )
