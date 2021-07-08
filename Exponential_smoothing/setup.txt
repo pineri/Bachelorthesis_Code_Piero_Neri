@@ -1,0 +1,12 @@
+The following Python packages need to be installed:
+
+- pandas
+- matplotlib
+- datetime
+- numpy
+- math
+- copy
+
+In order to reproduce the exponential smoothing forecasting results (possibly with little devations due to the random search part in the optimization procedure) over the 49 time intervals of temperature or humidity values, please make sure to have both files, 'evaluation_exponential_smoothing.py' and 'exponential_smoothing_functions.py', in the same directory. Finally, run the file 'evaluation_exponential_smoothing.py'.
+
+The desired variable (e.g., 'temperature' or 'humidity') can be set in the file 'evaluation_exponential_smoothing.py' in line 64.

@@ -1,0 +1,13 @@
+The following Python packages need to be installed:
+
+- pandas
+- datetime
+- numpy
+- math
+- copy
+- pmdarima
+- warnings
+
+In order to reproduce the ARIMA forecasting results over the 49 time intervals of temperature or humidity values, please make sure to have both files, 'evaluation_arima.py' and 'arima_functions.py', in the same directory. Finally, run the file 'evaluation_arima.py'.
+
+The desired variable (e.g., 'temperature' or 'humidity') can be set in the file 'evaluation_arima.py' in line 67.

@@ -1,0 +1,11 @@
+The following Python packages need to be installed:
+
+- pandas
+- matplotlib
+- datetime
+- numpy
+- math
+- copy
+- itertools
+
+In order to perform a classical decomposition of humidity or temperature values for the year 2019 in Zurich, the file 'decomposition_example.py' has to be run. Please make sure that both files, 'decomposition_example.py' and 'decomposition_functions.py', are in the same directory. Whether an additive or a multiplicative  decomposition should be performed can be set in the file 'decomposition_example.py' in line 66 in the decompose function. The desired variable (i.e., 'temperature' or 'humidity') to be decomposed can be set in the same line. The desired time interval (for the year 2019) for which one wishes to perform a decomposition can be set in line 13-14.
